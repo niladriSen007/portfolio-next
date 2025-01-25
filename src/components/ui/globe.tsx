@@ -5,11 +5,13 @@ import { Canvas, extend, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Color, Fog, PerspectiveCamera, Scene, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
-import { Object3DNode } from '@react-three/fiber/dist/declarations/src/core/renderer';
+import { Object3D } from "three";
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
-    threeGlobe: Object3DNode<ThreeGlobe, typeof ThreeGlobe>;
+    threeGlobe: Partial<ThreeGlobe> & {
+      ref?: React.RefObject<ThreeGlobe | null>;
+    };
   }
 }
 
@@ -74,7 +76,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     | null
   >(null);
 
-  const globeRef = useRef<ThreeGlobe | null>(null);
+  const globeRef = useRef<ThreeGlobe>(null);
 
   const defaultProps = {
     pointSize: 1,
@@ -225,11 +227,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     };
   }, [globeRef.current, globeData]);
 
-  return (
-    <>
-      <threeGlobe ref={globeRef} />
-    </>
-  );
+  return <threeGlobe ref={globeRef} />;
 }
 
 export function WebGLRendererConfig() {

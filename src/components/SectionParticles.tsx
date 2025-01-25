@@ -1,8 +1,8 @@
 'use client'
 import { useCallback } from "react"
 import Particles from "react-tsparticles"
+import { Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
-import type { Engine } from "tsparticles-engine"
 
 interface SectionParticlesProps {
   variant: "skills" | "projects" | "contact"
@@ -10,7 +10,7 @@ interface SectionParticlesProps {
 
 export default function SectionParticles({ variant }: SectionParticlesProps) {
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine)
+    await loadFull(engine as any)
   }, [])
 
   const getParticlesConfig = (variant: string) => {
@@ -85,10 +85,10 @@ export default function SectionParticles({ variant }: SectionParticlesProps) {
             },
           },
           move: {
-            direction: "none",
+            direction: "none" as const,
             enable: true,
             outModes: {
-              default: "bounce",
+              default: "bounce" as const,
             },
             random: false,
             speed: 1,
@@ -110,14 +110,14 @@ export default function SectionParticles({ variant }: SectionParticlesProps) {
             },
           },
           move: {
+            direction: "none" as const,
             enable: true,
-            speed: 0.5,
-            direction: "none",
-            random: true,
-            straight: false,
             outModes: {
-              default: "out",
+              default: "out" as const,
             },
+            random: true,
+            speed: 0.5,
+            straight: false,
           },
         },
       },
@@ -135,14 +135,14 @@ export default function SectionParticles({ variant }: SectionParticlesProps) {
             },
           },
           move: {
+            direction: "none" as const,
             enable: true,
-            speed: 0.8,
-            direction: "none",
-            random: false,
-            straight: false,
             outModes: {
-              default: "out",
+              default: "out" as const,
             },
+            random: false,
+            speed: 0.8,
+            straight: false,
           },
           shape: {
             type: "circle",

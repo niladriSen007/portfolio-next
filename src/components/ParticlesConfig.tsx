@@ -1,12 +1,12 @@
 'use client'
 import { useCallback } from "react"
 import Particles from "react-tsparticles"
+import { Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
-import type { Engine } from "tsparticles-engine"
 
 export default function ParticlesBackground() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine)
+    await loadFull(engine as any) // Temporary type assertion to fix compatibility
   }, [])
 
   return (

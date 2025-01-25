@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-three/drei": "^9.121.3",
     "@react-three/fiber": "^9.0.0-alpha.8",
+    "@tsparticles/engine": "^3.8.0",
     "@types/three": "^0.172.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -29,6 +30,7 @@
     "three-globe": "^2.41.4",
     "three-stdlib": "^2.35.12",
     "tsparticles": "^3.8.0",
+    "tsparticles-engine": "^2.12.0",
     "tsparticles-slim": "^2.12.0"
   },
   "devDependencies": {
