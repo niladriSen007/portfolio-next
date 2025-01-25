@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="#1a1a1a"/>
+  <g transform="translate(100,50)">
+    <!-- Analytics Graph -->
+    <path d="M50 400 L50 100 L650 100" stroke="#333" stroke-width="2"/>
+    <path d="M50 400 Q200 200 350 300 T650 150" stroke="url(#grad2)" stroke-width="4" fill="none"/>
+    
+    <!-- Data Points -->
+    <circle cx="150" cy="250" r="8" fill="#06b6d4"/>
+    <circle cx="300" cy="180" r="8" fill="#06b6d4"/>
+    <circle cx="450" cy="320" r="8" fill="#06b6d4"/>
+    <circle cx="600" cy="200" r="8" fill="#06b6d4"/>
+    
+    <!-- AI Brain Symbol -->
+    <g transform="translate(300,400) scale(0.8)">
+      <path d="M0 0 Q100 -100 200 0 Q100 100 0 0" fill="none" stroke="url(#grad2)" stroke-width="3"/>
+      <circle cx="100" cy="0" r="30" fill="url(#grad2)" opacity="0.5"/>
+    </g>
+  </g>
+</svg> 
