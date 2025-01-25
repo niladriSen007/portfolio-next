@@ -1,6 +1,6 @@
 'use client'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface SkillCardProps {
   skill: {
@@ -76,7 +76,7 @@ export default function SkillCard({ skill }: SkillCardProps) {
 
       {/* Bottom Gradient Line */}
       <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-100 transition-opacity" 
-        style={{ '--tw-gradient-via-color': skill.color } as any}
+        style={{ '--tw-gradient-via-color': skill.color } as React.CSSProperties}
       />
     </motion.div>
   )

@@ -1,37 +1,31 @@
 "use client"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { useCallback } from "react"
-import { loadSlim } from "tsparticles-slim"
-import Particles from "react-tsparticles"
-import type { Container } from "tsparticles-engine"
-import SkillCard from "@/components/SkillCard"
 import AnimatedBackground from "@/components/AnimatedBackground"
-import SectionTransition from "@/components/SectionTransition"
-import { Globe } from "@/components/ui/globe"
-import { GlobeDemo } from "@/components/GlobeDemo"
-import ProjectCard from "@/components/ProjectCard"
-import ContactSection from '@/components/ContactSection'
-import LightningEffect from '@/components/LightningEffect'
 import ContactParticles from "@/components/ContactParticles"
-import dynamic from 'next/dynamic'
-import LoadingState from '@/components/LoadingState'
-import React from 'react'
+import LightningEffect from "@/components/LightningEffect"
+import LoadingState from "@/components/LoadingState"
+import ProjectCard from "@/components/ProjectCard"
+import SkillCard from "@/components/SkillCard"
+import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
+import Link from "next/link"
+import React, { useCallback, useState, useEffect } from "react"
+import Particles from "react-tsparticles"
+import { loadSlim } from "tsparticles-slim"
 
 // Dynamically import heavy components
 const ContactSectionDynamic = dynamic(
-  () => import('@/components/ContactSection').then(mod => mod.default),
+  () => import("@/components/ContactSection").then((mod) => mod.default),
   {
     loading: () => <LoadingState />,
-    ssr: false
+    ssr: false,
   }
 )
 
 const GlobeDemoDynamic = dynamic(
-  () => import('@/components/GlobeDemo').then(mod => mod.GlobeDemo),
+  () => import("@/components/GlobeDemo").then((mod) => mod.GlobeDemo),
   {
     loading: () => <LoadingState />,
-    ssr: false
+    ssr: false,
   }
 )
 
@@ -45,19 +39,19 @@ export default function Home() {
   }, [])
 
   // Animation variants
-  const fadeInUp = {
+/*   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 },
-  }
+  } */
 
-  const staggerContainer = {
+/*   const staggerContainer = {
     animate: {
       transition: {
         staggerChildren: 0.1,
       },
     },
-  }
+  } */
 
   const skills = [
     {
@@ -65,142 +59,157 @@ export default function Home() {
       icon: "/icons/javascript.svg",
       color: "#F7DF1E",
       level: 90,
-      description: "Modern ES6+, async/await, functional programming"
+      description: "Modern ES6+, async/await, functional programming",
     },
     {
       name: "Java",
       icon: "/icons/java.svg",
       color: "#E32C2E",
       level: 95,
-      description: "Core Java, Collections, Multithreading, JVM Optimization"
+      description: "Core Java, Collections, Multithreading, JVM Optimization",
     },
     {
       name: "Spring Boot",
       icon: "/icons/spring.svg",
       color: "#6DB33F",
       level: 92,
-      description: "Microservices, REST APIs, JPA/Hibernate, Spring Cloud"
+      description: "Microservices, REST APIs, JPA/Hibernate, Spring Cloud",
     },
     {
       name: "Spring Security",
       icon: "/icons/spring-security.svg",
       color: "#6CB52D",
       level: 88,
-      description: "OAuth2, JWT, Role-based Auth, Security Best Practices"
+      description: "OAuth2, JWT, Role-based Auth, Security Best Practices",
     },
     {
       name: "React",
       icon: "/icons/react.svg",
       color: "#61DAFB",
       level: 95,
-      description: "Next.js, Redux, React Query, Custom Hooks"
+      description: "Next.js, Redux, React Query, Custom Hooks",
     },
     {
       name: "Node.js",
       icon: "/icons/nodejs.svg",
       color: "#339933",
       level: 85,
-      description: "Express, REST APIs, GraphQL, Microservices"
+      description: "Express, REST APIs, GraphQL, Microservices",
     },
     {
       name: "TypeScript",
       icon: "/icons/typescript.svg",
       color: "#3178C6",
       level: 88,
-      description: "Type safety, interfaces, generics, decorators"
+      description: "Type safety, interfaces, generics, decorators",
     },
     {
       name: "Terraform",
       icon: "/icons/terraform.svg",
       color: "#7B42BC",
       level: 82,
-      description: "IaC, AWS/GCP Infrastructure, State Management"
+      description: "IaC, AWS/GCP Infrastructure, State Management",
     },
     {
       name: "MongoDB",
       icon: "/icons/mongodb.svg",
       color: "#47A248",
       level: 82,
-      description: "Schema design, aggregation, indexing"
+      description: "Schema design, aggregation, indexing",
     },
     {
       name: "PostgreSQL",
       icon: "/icons/postgresql.svg",
       color: "#4169E1",
       level: 80,
-      description: "Complex queries, optimization, migrations"
+      description: "Complex queries, optimization, migrations",
     },
     {
       name: "Docker",
       icon: "/icons/docker.svg",
       color: "#2496ED",
       level: 75,
-      description: "Containerization, Docker Compose, deployment"
+      description: "Containerization, Docker Compose, deployment",
     },
     {
       name: "AWS",
       icon: "/icons/aws.svg",
       color: "#FF9900",
       level: 78,
-      description: "EC2, S3, Lambda, CloudFormation"
-    }
+      description: "EC2, S3, Lambda, CloudFormation",
+    },
   ]
 
   const projects = [
     {
       title: "Enterprise Microservices Platform",
-      description: "A scalable microservices architecture built with Spring Boot and React, handling millions of transactions daily.",
+      description:
+        "A scalable microservices architecture built with Spring Boot and React, handling millions of transactions daily.",
       image: "/projects/microservices.svg",
       tags: ["Spring Boot", "React", "AWS", "Kubernetes"],
       links: {
         github: "https://github.com/yourusername/project1",
-        live: "https://project1.com"
+        live: "https://project1.com",
       },
       highlights: [
         "Microservices Architecture",
         "Event-Driven Design",
         "CI/CD Pipeline",
-        "Cloud Native"
-      ]
+        "Cloud Native",
+      ],
     },
     {
       title: "AI-Powered Analytics Dashboard",
-      description: "Real-time analytics platform with machine learning capabilities for predictive insights.",
+      description:
+        "Real-time analytics platform with machine learning capabilities for predictive insights.",
       image: "/projects/ai-analytics.svg",
       tags: ["TypeScript", "Python", "TensorFlow", "MongoDB"],
       links: {
         github: "https://github.com/yourusername/project2",
-        live: "https://project2.com"
+        live: "https://project2.com",
       },
       highlights: [
         "Real-time Analytics",
         "Machine Learning",
         "Interactive Visualizations",
-        "Scalable Backend"
-      ]
+        "Scalable Backend",
+      ],
     },
     {
       title: "Cloud Infrastructure Automation",
-      description: "Infrastructure as Code solution for automated cloud resource management and deployment.",
+      description:
+        "Infrastructure as Code solution for automated cloud resource management and deployment.",
       image: "/projects/cloud-infra.svg",
       tags: ["Terraform", "AWS", "Docker", "Jenkins"],
       links: {
         github: "https://github.com/yourusername/project3",
-        live: "https://project3.com"
+        live: "https://project3.com",
       },
       highlights: [
         "Infrastructure as Code",
         "Multi-cloud Support",
         "Automated Deployment",
-        "Security Best Practices"
-      ]
-    }
+        "Security Best Practices",
+      ],
+    },
   ]
+
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY
+      setIsVisible(scrolled < 1000) // Only show particles in first 1000px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-[#0A0A0A] enhanced-bg">
       <LightningEffect />
-      <AnimatedBackground />
+      {isVisible && <AnimatedBackground />}
 
       {/* Enhanced Particle Background */}
       <Particles
@@ -299,7 +308,7 @@ export default function Home() {
                 >
                   <div className="relative w-full h-full">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 blur-lg animate-pulse-slow" />
-                   {/*  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-70 animate-spin-slow" style={{ animationDuration: '10s' }} />  */}
+                    {/*  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-70 animate-spin-slow" style={{ animationDuration: '10s' }} />  */}
                   </div>
                 </motion.div>
 
@@ -309,7 +318,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  👋 Hello, I'm NILADRI
+                  👋 Hello, I&apos;m NILADRI
                 </motion.span>
 
                 <motion.h1
@@ -319,19 +328,20 @@ export default function Home() {
                   transition={{ delay: 0.3 }}
                 >
                   Building
-                  <motion.span 
+                  <motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 inline-block"
-                    animate={{ 
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                    animate={{
+                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 5,
                       repeat: Infinity,
-                      ease: 'linear'
+                      ease: "linear",
                     }}
-                    style={{ backgroundSize: '200% 200%' }}
+                    style={{ backgroundSize: "200% 200%" }}
                   >
-                    {" "}Digital Experiences{" "}
+                    {" "}
+                    Digital Experiences{" "}
                   </motion.span>
                   That Matters
                 </motion.h1>
@@ -368,7 +378,9 @@ export default function Home() {
                     className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden rounded-full bg-transparent border-2 border-white/10"
                   >
                     <div className="absolute inset-0 w-0 bg-white/5 transition-all duration-300 group-hover:w-full" />
-                    <span className="relative text-white group-hover:text-white">Contact Me</span>
+                    <span className="relative text-white group-hover:text-white">
+                      Contact Me
+                    </span>
                   </Link>
                 </motion.div>
               </div>
@@ -399,7 +411,8 @@ export default function Home() {
               Skills & Technologies
             </h2>
             <p className="text-xl text-gray-400 leading-relaxed">
-              A curated stack of modern technologies I use to build amazing digital experiences
+              A curated stack of modern technologies I use to build amazing
+              digital experiences
             </p>
           </motion.div>
 
@@ -419,7 +432,10 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 relative overflow-hidden">
+        <section
+          id="projects"
+          className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 relative overflow-hidden"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -436,7 +452,11 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} />
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={index}
+              />
             ))}
           </div>
         </section>
@@ -447,10 +467,10 @@ export default function Home() {
           <div className="absolute inset-0 z-0">
             <ContactParticles />
           </div>
-          
+
           {/* Add a gradient overlay to soften the particles */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A] z-10" />
-          
+
           {/* Contact section content with higher z-index */}
           <div className="relative z-20">
             <ContactSectionDynamic />

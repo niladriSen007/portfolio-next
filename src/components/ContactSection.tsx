@@ -1,7 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { FiSend, FiMail, FiUser, FiMessageSquare } from 'react-icons/fi'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { FiMail, FiMessageSquare, FiSend, FiUser } from 'react-icons/fi';
 
 interface FormErrors {
   name?: string;
@@ -40,7 +40,7 @@ export default function ContactSection() {
     return Object.keys(newErrors).length === 0
   }
 
-  const clearForm = () => {
+ /*  const clearForm = () => {
     setFormState({
       name: '',
       email: '',
@@ -48,7 +48,7 @@ export default function ContactSection() {
     })
     setErrors({})
     setSubmitStatus(null)
-  }
+  } */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -83,8 +83,8 @@ export default function ContactSection() {
       } else {
         setSubmitStatus('error')
       }
-    } catch (error) {
-      setSubmitStatus('error')
+    } catch (error : unknown) {
+      setSubmitStatus(error instanceof Error ? 'error' : 'error')
     } finally {
       setIsSubmitting(false)
     }
@@ -113,12 +113,12 @@ export default function ContactSection() {
           <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600"
           >
-            Let's Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </motion.h2>
           <motion.p
             className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto"
           >
-            Have a project in mind? Let's discuss how we can help bring your ideas to life.
+            Have a project in mind? Let&apos;s discuss how we can help bring your ideas to life.
           </motion.p>
         </motion.div>
 
