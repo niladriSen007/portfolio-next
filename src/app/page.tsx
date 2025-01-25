@@ -12,6 +12,7 @@ import { Globe } from "@/components/ui/globe"
 import { GlobeDemo } from "@/components/GlobeDemo"
 import ProjectCard from "@/components/ProjectCard"
 import ContactSection from '@/components/ContactSection'
+import LightningEffect from '@/components/LightningEffect'
 
 export default function Home() {
   // Particle background initialization
@@ -173,7 +174,8 @@ export default function Home() {
   ]
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-[#0A0A0A]">
+    <main className="min-h-screen relative overflow-hidden bg-[#0A0A0A] enhanced-bg">
+      <LightningEffect />
       <AnimatedBackground />
 
       {/* Enhanced Particle Background */}
@@ -260,11 +262,23 @@ export default function Home() {
               transition={{ duration: 1 }}
               className="relative order-2 lg:order-1 col-span-2 lg:col-span-1"
             >
-              {/* Decorative Elements */}
-              <div className="absolute -left-4 -top-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
-              <div className="absolute -right-4 -bottom-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
+              {/* Floating Elements */}
+              <div className="absolute -left-20 -top-20 w-40 h-40 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float-slow" />
+              <div className="absolute -right-20 -bottom-20 w-40 h-40 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float-slow animation-delay-2000" />
 
               <div className="relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute -left-10 -top-10 w-20 h-20"
+                >
+                  <div className="relative w-full h-full">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 blur-lg animate-pulse-slow" />
+                   {/*  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-70 animate-spin-slow" style={{ animationDuration: '10s' }} />  */}
+                  </div>
+                </motion.div>
+
                 <motion.span
                   className="text-blue-500 text-lg sm:text-xl font-semibold mb-4 block"
                   initial={{ opacity: 0, y: 20 }}
@@ -273,6 +287,7 @@ export default function Home() {
                 >
                   👋 Hello, I'm NILADRI
                 </motion.span>
+
                 <motion.h1
                   className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 sm:mb-8"
                   initial={{ opacity: 0, y: 20 }}
@@ -280,23 +295,24 @@ export default function Home() {
                   transition={{ delay: 0.3 }}
                 >
                   Building
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600">
-                    {" "}
-                    Digital Experiences{" "}
-                  </span>
-                  That Matter
+                  <motion.span 
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 inline-block"
+                    animate={{ 
+                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                    }}
+                    transition={{ 
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: 'linear'
+                    }}
+                    style={{ backgroundSize: '200% 200%' }}
+                  >
+                    {" "}Digital Experiences{" "}
+                  </motion.span>
+                  That Matters
                 </motion.h1>
-                <motion.p
-                  className="text-gray-400 text-lg mb-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  Full Stack Developer specializing in building exceptional
-                  digital experiences. Focused on creating innovative and
-                  user-centric solutions.
-                </motion.p>
 
+                {/* Interactive CTA Buttons */}
                 <motion.div
                   className="flex flex-wrap gap-4"
                   initial={{ opacity: 0, y: 20 }}
@@ -305,18 +321,30 @@ export default function Home() {
                 >
                   <Link
                     href="#projects"
-                    className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium transition-all bg-white rounded-full hover:bg-white group-hover:bg-opacity-90"
+                    className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden rounded-full"
                   >
-                    <span className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 absolute"></span>
-                    <span className="relative text-white group-hover:text-white">
+                    <div className="absolute inset-0 w-full h-full transition duration-300 group-hover:scale-105">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <span className="relative text-white group-hover:text-white flex items-center gap-2">
                       View My Work
+                      <motion.span
+                        initial={{ x: 0 }}
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        →
+                      </motion.span>
                     </span>
                   </Link>
+
                   <Link
                     href="#contact"
-                    className="inline-flex items-center justify-center px-8 py-3 font-medium text-white bg-transparent border-2 border-white/10 rounded-full hover:bg-white/5 transition-colors"
+                    className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden rounded-full bg-transparent border-2 border-white/10"
                   >
-                    Contact Me
+                    <div className="absolute inset-0 w-0 bg-white/5 transition-all duration-300 group-hover:w-full" />
+                    <span className="relative text-white group-hover:text-white">Contact Me</span>
                   </Link>
                 </motion.div>
               </div>
@@ -327,8 +355,9 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="hidden md:block md:order-2 w-full  mx-auto"
+              className="hidden md:block md:order-2 w-full mx-auto relative"
             >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full filter blur-3xl" />
               <GlobeDemo />
             </motion.div>
           </div>
