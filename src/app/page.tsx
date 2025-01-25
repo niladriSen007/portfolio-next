@@ -13,6 +13,30 @@ import { GlobeDemo } from "@/components/GlobeDemo"
 import ProjectCard from "@/components/ProjectCard"
 import ContactSection from '@/components/ContactSection'
 import LightningEffect from '@/components/LightningEffect'
+import ContactParticles from "@/components/ContactParticles"
+import dynamic from 'next/dynamic'
+import LoadingState from '@/components/LoadingState'
+import React from 'react'
+
+// Dynamically import heavy components
+const ContactSectionDynamic = dynamic(
+  () => import('@/components/ContactSection').then(mod => mod.default),
+  {
+    loading: () => <LoadingState />,
+    ssr: false
+  }
+)
+
+const GlobeDemoDynamic = dynamic(
+  () => import('@/components/GlobeDemo').then(mod => mod.GlobeDemo),
+  {
+    loading: () => <LoadingState />,
+    ssr: false
+  }
+)
+
+// Use React.memo for static components
+const SkillCardMemo = React.memo(SkillCard)
 
 export default function Home() {
   // Particle background initialization
@@ -358,7 +382,7 @@ export default function Home() {
               className="hidden md:block md:order-2 w-full mx-auto relative"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full filter blur-3xl" />
-              <GlobeDemo />
+              <GlobeDemoDynamic />
             </motion.div>
           </div>
         </section>
@@ -388,7 +412,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <SkillCard skill={skill} />
+                <SkillCardMemo skill={skill} />
               </motion.div>
             ))}
           </div>
@@ -419,7 +443,18 @@ export default function Home() {
 
         {/* Contact Section with enhanced form styling */}
         <section className="py-20 relative overflow-hidden">
-          <ContactSection />
+          {/* Add the particles component */}
+          <div className="absolute inset-0 z-0">
+            <ContactParticles />
+          </div>
+          
+          {/* Add a gradient overlay to soften the particles */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A] z-10" />
+          
+          {/* Contact section content with higher z-index */}
+          <div className="relative z-20">
+            <ContactSectionDynamic />
+          </div>
         </section>
       </div>
     </main>
