@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import SocialHeader from '@/components/SocialHeader'
 
 // Optimize font loading
 const inter = Inter({ 
@@ -37,6 +38,7 @@ export default function RootLayout({
         {/* Add more critical assets as needed */}
       </head>
       <body className={`${inter.className} bg-[#0A0A0A] text-white antialiased`}>
+        <SocialHeader />
         {children}
       </body>
     </html>
