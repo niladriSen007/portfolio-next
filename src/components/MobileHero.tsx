@@ -20,13 +20,13 @@ export default function MobileHero() {
     {
       name: 'GitHub',
       icon: <FaGithub className="w-8 h-8" />,
-      url: 'https://github.com/niladrix719',
+      url: 'https://github.com/niladriSen007',
       color: 'from-gray-400 to-gray-600'
     },
     {
       name: 'LinkedIn',
       icon: <FaLinkedin className="w-8 h-8" />,
-      url: 'https://www.linkedin.com/in/niladri-adhikary',
+      url: 'https://www.linkedin.com/in/niladri-sen',
       color: 'from-blue-400 to-blue-600'
     }
   ]
