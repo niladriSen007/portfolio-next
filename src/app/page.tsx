@@ -11,6 +11,7 @@ import Link from "next/link"
 import React, { useCallback, useState, useEffect } from "react"
 import Particles from "react-tsparticles"
 import { loadSlim } from "tsparticles-slim"
+import MobileHero from '@/components/MobileHero'
 
 // Dynamically import heavy components
 const ContactSectionDynamic = dynamic(
@@ -477,6 +478,9 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Add the mobile hero section */}
+      <MobileHero />
     </main>
   )
 }

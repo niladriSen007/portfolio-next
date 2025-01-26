@@ -2,17 +2,21 @@
   "name": "portfolio-next",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "ts-node node testGenerator.ts",
+    "test:generate": "node --loader ts-node/esm testGenerator.tsx"
   },
   "dependencies": {
     "@react-three/drei": "^9.121.3",
     "@react-three/fiber": "^9.0.0-alpha.8",
     "@tsparticles/engine": "^3.8.0",
     "@types/three": "^0.172.0",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.0.5",
@@ -29,6 +33,7 @@
     "three": "^0.172.0",
     "three-globe": "^2.41.4",
     "three-stdlib": "^2.35.12",
+    "ts-node": "^10.9.2",
     "tsparticles": "^3.8.0",
     "tsparticles-engine": "^2.12.0",
     "tsparticles-slim": "^2.12.0"
@@ -43,6 +48,6 @@
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.0.0"
   }
 }
